@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
 
-public class TVMain {
+public class TVMain{
     // Attributes
     private ArrayList<TVSeries> shows = new ArrayList<>();
+    TVSeries user1 = new TVSeries();
 
     // Methods
     public TVMain(){
-        TVSeries user1 = new TVSeries();
         String name;
         
         Scanner keyboard = new Scanner(System.in);
@@ -68,13 +69,25 @@ public class TVMain {
         }
         keyboard.close();
     }
-    public void Write2File(){
+    public void createShowData(){   //?
         //jj
     }
-    public void readFromFile(){
-        //jj
+    public void Write2File() throws IOException{   //Serializing
+        FileOutputStream fileOut = new FileOutputStream("TVSeriesInfo.ser");
+        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+        out.writeObject(user1);
+        out.close();
+        fileOut.close();
     }
-    public void createShowData(){
-        //jj
+    public void readFromFile() throws IOException{     //Deserializing
+        FileInputStream fileIn = new FileInputStream("C:\\Users\\adrian.eriksson\\Documents\\Java projects 2\\lekv_prog2_uppg2_klasser\\TVSeriesInfo.ser");
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        try {
+            user1 = (TVSeries) in.readObject();
+        } catch (ClassNotFoundException e) {
+            System.out.println("Reading of previously saved file failed!");
+        }
+        in.close();
+        fileIn.close();
     }
 }

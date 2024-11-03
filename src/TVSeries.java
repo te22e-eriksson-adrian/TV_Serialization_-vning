@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.Serializable;
 
-public class TVSeries {
+public class TVSeries implements Serializable{
     // Keyboard
     Scanner keyboard = new Scanner(System.in);
 
